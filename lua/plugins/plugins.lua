@@ -1,7 +1,4 @@
 return {
-  -- Plugin Manager itself (not needed if using LazyVim starter)
-  { "VundleVim/Vundle.vim", lazy = false },
-
   -- Markdown preview
   {
     "iamcco/markdown-preview.nvim",
@@ -89,6 +86,7 @@ return {
   { "tpope/vim-rails", ft = "ruby" },
 
   -- Snippets
+  { "rafamadriz/friendly-snippets" },
   {
     "L3MON4D3/LuaSnip",
     version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
@@ -97,12 +95,21 @@ return {
 
   -- Miscellaneous Tools
   { "rajasegar/vim-pnpm", ft = "json" },
-  { "scrooloose/nerdcommenter", event = "VeryLazy" },
   { "supermaven-inc/supermaven-nvim", lazy = false },
+  {
+    "numToStr/Comment.nvim",
+    opts = {},
+  },
   { "tpope/vim-sensible", lazy = false },
   {
-    "tpope/vim-surround",
-    keys = { "ds", "cs", "ys" },
+    "kylechui/nvim-surround",
+    version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end,
   },
   { "ryanoasis/vim-devicons", lazy = false },
 
