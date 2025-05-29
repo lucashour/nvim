@@ -9,13 +9,11 @@ return {
   { "MarcWeber/vim-addon-mw-utils" },
 
   -- Git
-  --{ "Xuyuanp/nerdtree-git-plugin", dependencies = { "preservim/nerdtree" } },
   { "kdheepak/lazygit.nvim", cmd = "LazyGit" },
   { "tpope/vim-fugitive", event = "VeryLazy" },
 
   -- UI & Colors
   { "chriskempson/base16-vim", lazy = false },
-  --{ "flazz/vim-colorschemes", lazy = false },
   {
     "itchyny/lightline.vim",
     config = function()
@@ -26,9 +24,7 @@ return {
   },
 
   -- File Navigation
-  --{ "preservim/nerdtree", cmd = "NERDTreeToggle" },
   { "majutsushi/tagbar", cmd = "TagbarToggle" },
-  --{ "ctrlpvim/ctrlp.vim", cmd = "CtrlP" },
 
   -- Grepper
   {
@@ -51,14 +47,45 @@ return {
     cmd = "Telescope",
   },
 
-  -- Completion
+  -- LSP
   {
-    "neoclide/coc.nvim",
-    branch = "master",
-    build = "npm ci",
-    config = function()
-      vim.g.coc_global_extensions = { "coc-tsserver", "coc-flutter" }
-    end,
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        tsserver = {},
+        dartls = {},
+      },
+    },
+  },
+
+  -- Formatters
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        javascript = { "prettier" },
+        typescript = { "prettier" },
+        typescriptreact = { "prettier" },
+        json = { "prettier" },
+        css = { "prettier" },
+        html = { "prettier" },
+        yaml = { "prettier" },
+        markdown = { "prettier" },
+      },
+    },
+  },
+
+  -- Linters
+  {
+    "mfussenegger/nvim-lint",
+    opts = {
+      linters_by_ft = {
+        javascript = { "eslint_d" },
+        typescript = { "eslint_d" },
+        typescriptreact = { "eslint_d" },
+        json = { "eslint_d" },
+      },
+    },
   },
 
   -- Language Support

@@ -36,8 +36,3 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "ruby", "eruby", "yaml" },
   command = "setlocal path+=lib colorcolumn=80 iskeyword+=?",
 })
-
-vim.api.nvim_create_autocmd("CursorHold", {
-  pattern = "*",
-  command = "silent call CocActionAsync('highlight')",
-})

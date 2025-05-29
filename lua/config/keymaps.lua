@@ -22,23 +22,12 @@ map("n", "<Space>", ":nohlsearch<Bar>:echo<CR>", opts)
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
 map("n", "<leader>gg", "<cmd>LazyGit<CR>", opts)
 
--- Code actions and quickfix
-map("n", "<leader>ac", "<Plug>(coc-codeaction)", {})
-map("n", "<leader>qf", "<Plug>(coc-fix-current)", {})
-
--- Go to definitions/types/refs/etc.
-map("n", "gd", "<Plug>(coc-definition)", { silent = true })
-map("n", "gy", "<Plug>(coc-type-definition)", { silent = true })
-map("n", "gi", "<Plug>(coc-implementation)", { silent = true })
-map("n", "gr", "<Plug>(coc-references)", { silent = true })
-
--- Show documentation
-map("n", "<leader>K", ":lua ShowDocumentation()<CR>", opts)
-
--- Smart Enter in insert mode
-map(
-  "i",
-  "<CR>",
-  [[coc#pum#visible() && coc#pum#info()['index'] == -1 ? "\<C-r>=coc#pum#cancel()\<CR>\<CR>" : coc#pum#visible() ? coc#_select_confirm() : "\<CR>"]],
-  { expr = true, silent = true }
-)
+-- LSP
+map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
+map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
+map("n", "gy", "<cmd>lua vim.lsp.buf.type_definition()<CR>", opts)
+map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+map("n", "<leader>ac", vim.lsp.buf.code_action, { desc = "Code Action" })
+map("n", "<leader>qf", vim.lsp.buf.format, { desc = "Format Document" })
+map("n", "K", vim.lsp.buf.hover, { desc = "Hover Documentation" })
+map("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename Symbol" })

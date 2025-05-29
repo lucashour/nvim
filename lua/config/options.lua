@@ -11,3 +11,4 @@ opt.background = "dark"
 opt.encoding = "utf-8"
 opt.guifont = "Monaco:h14" -- example for GUI
 opt.termguicolors = true
+opt.numberwidth = 2
