@@ -3,10 +3,15 @@ return {
   { "VundleVim/Vundle.vim", lazy = false },
 
   -- Markdown preview
-  { "JamshedVesuna/vim-markdown-preview", ft = "markdown" },
-
-  -- Utilities
-  { "MarcWeber/vim-addon-mw-utils" },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+  },
 
   -- Git
   { "kdheepak/lazygit.nvim", cmd = "LazyGit" },
@@ -20,21 +25,6 @@ return {
       vim.g.lightline = { colorscheme = "wombat" }
       vim.opt.laststatus = 2
       vim.opt.showmode = false
-    end,
-  },
-
-  -- File Navigation
-  { "majutsushi/tagbar", cmd = "TagbarToggle" },
-
-  -- Grepper
-  {
-    "mhinz/vim-grepper",
-    cmd = "Grepper",
-    config = function()
-      vim.opt.grepprg = "ack"
-      vim.g.grepper = {
-        tools = { "git", "pt" },
-      }
     end,
   },
 
@@ -89,8 +79,6 @@ return {
   },
 
   -- Language Support
-  { "pangloss/vim-javascript", ft = "javascript" },
-  { "leafgarland/typescript-vim", ft = "typescript" },
   { "peitalin/vim-jsx-typescript", ft = "typescriptreact" },
   { "jparise/vim-graphql", ft = "graphql" },
   { "prisma/vim-prisma", ft = "prisma" },
@@ -101,8 +89,11 @@ return {
   { "tpope/vim-rails", ft = "ruby" },
 
   -- Snippets
-  { "garbas/vim-snipmate", event = "InsertEnter" },
-  { "honza/vim-snippets", lazy = true },
+  {
+    "L3MON4D3/LuaSnip",
+    version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    build = "make install_jsregexp",
+  },
 
   -- Miscellaneous Tools
   { "rajasegar/vim-pnpm", ft = "json" },
