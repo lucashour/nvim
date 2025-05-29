@@ -36,3 +36,17 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "ruby", "eruby", "yaml" },
   command = "setlocal path+=lib colorcolumn=80 iskeyword+=?",
 })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function(args)
+    require("conform").format({ bufnr = args.buf })
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = "*",
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
