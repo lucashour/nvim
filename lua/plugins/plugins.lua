@@ -93,9 +93,20 @@ return {
     build = "make install_jsregexp",
   },
 
+  -- AI
+  {
+    "greggh/claude-code.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- Required for git operations
+    },
+    config = function()
+      require("claude-code").setup()
+    end,
+  },
+  { "supermaven-inc/supermaven-nvim", lazy = false },
+
   -- Miscellaneous Tools
   { "rajasegar/vim-pnpm", ft = "json" },
-  { "supermaven-inc/supermaven-nvim", lazy = false },
   {
     "numToStr/Comment.nvim",
     opts = {},
