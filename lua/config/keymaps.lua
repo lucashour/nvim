@@ -20,6 +20,7 @@ map("n", "<Space>", ":nohlsearch<Bar>:echo<CR>", opts)
 
 -- Plugin mappings (adjust based on actual LazyVim plugin setup)
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
+map("n", "<leader>/", "<cmd>Telescope live_grep<CR>", opts)
 map("n", "<leader>gg", "<cmd>LazyGit<CR>", opts)
 
 -- Commenting
