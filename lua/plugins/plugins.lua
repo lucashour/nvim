@@ -106,6 +106,19 @@ return {
   { "supermaven-inc/supermaven-nvim", lazy = false },
 
   -- Miscellaneous Tools
+  {
+    "chrisgrieser/nvim-rip-substitute",
+    keys = {
+      {
+        "g/",
+        function()
+          require("rip-substitute").sub()
+        end,
+        mode = { "n", "x" },
+        desc = "Rip Substitute",
+      },
+    },
+  },
   { "rajasegar/vim-pnpm", ft = "json" },
   {
     "numToStr/Comment.nvim",
