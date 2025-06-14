@@ -10,18 +10,25 @@ return {
     ft = { "markdown" },
   },
 
-  -- Git
-  { "kdheepak/lazygit.nvim", cmd = "LazyGit" },
-  { "tpope/vim-fugitive", event = "VeryLazy" },
-
   -- UI & Colors
   { "chriskempson/base16-vim", lazy = false },
   {
     "itchyny/lightline.vim",
     config = function()
-      vim.g.lightline = { colorscheme = "wombat" }
-      vim.opt.laststatus = 2
-      vim.opt.showmode = false
+      vim.g.lightline = {
+        colorscheme = "wombat",
+        active = {
+          left = {
+            { "mode", "paste" },
+            { "readonly", "filename", "modified" },
+          },
+          right = {
+            { "lineinfo" },
+            { "percent" },
+            { "fileformat", "fileencoding", "filetype" },
+          },
+        },
+      }
     end,
   },
 
@@ -32,6 +39,17 @@ return {
     version = "0.1.8",
     dependencies = { "nvim-lua/plenary.nvim" },
     cmd = "Telescope",
+  },
+
+  -- Git
+  { "kdheepak/lazygit.nvim", cmd = "LazyGit" },
+  { "tpope/vim-fugitive", event = "VeryLazy" },
+  {
+    "ruifm/gitlinker.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("gitlinker").setup()
+    end,
   },
 
   -- LSP
