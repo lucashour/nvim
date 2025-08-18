@@ -9,6 +9,6 @@ opt.signcolumn = "yes"
 opt.syntax = "on"
 opt.background = "dark"
 opt.encoding = "utf-8"
-opt.guifont = "Monaco:h14" -- example for GUI
+opt.guifont = "FiraCode Nerd Font:h14"
 opt.termguicolors = true
 opt.numberwidth = 2
