@@ -135,12 +135,31 @@ return {
   -- LSP
   {
     "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        tsserver = {},
-        dartls = {},
-      },
-    },
+    opts = function(_, opts)
+      local configs = require("lspconfig.configs")
+      local util = require("lspconfig.util")
+
+      configs.herb_ls = {
+        default_config = {
+          cmd = { "herb-language-server", "--stdio" },
+          filetypes = { "html", "ruby", "eruby" },
+          root_dir = util.root_pattern("Gemfile", ".git"),
+        },
+      }
+
+      configs.html = {
+        default_config = {
+          cmd = { "vscode-html-language-server", "--stdio" },
+          filetypes = { "html", "templ" },
+          root_dir = util.root_pattern("package.json", ".git"),
+        },
+      }
+
+      opts.servers = opts.servers or {}
+
+      opts.servers.herb_ls = opts.servers.herb_ls or {}
+      opts.servers.html = opts.servers.html or {}
+    end,
   },
 
   -- Formatters
