@@ -1,3 +1,5 @@
+vim.env.MISE_RUBY_VERSION = "3.4.8"
+
 local opt = vim.opt
 
 opt.clipboard = "unnamedplus"
