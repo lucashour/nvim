@@ -32,9 +32,20 @@ vim.api.nvim_create_autocmd("FileType", {
   command = "setlocal path+=lib colorcolumn=80 iskeyword+=?",
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  group = "myfiletypes",
+  pattern = "eruby",
+  callback = function()
+    vim.b.autoformat = false
+  end,
+})
+
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
   callback = function(args)
+    if vim.b[args.buf].autoformat == false then
+      return
+    end
     require("conform").format({ bufnr = args.buf })
   end,
 })

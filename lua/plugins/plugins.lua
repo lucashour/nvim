@@ -159,6 +159,15 @@ return {
 
       opts.servers.herb_ls = opts.servers.herb_ls or {}
       opts.servers.html = opts.servers.html or {}
+
+      opts.servers.rubocop = vim.tbl_deep_extend("force", opts.servers.rubocop or {}, {
+        cmd = { "bundle", "exec", "rubocop", "--lsp" },
+        on_new_config = function(new_config, root_dir)
+          if not vim.fs.find("Gemfile", { upward = true, path = root_dir })[1] then
+            new_config.cmd = { "rubocop", "--lsp" }
+          end
+        end,
+      })
     end,
   },
 
@@ -175,6 +184,17 @@ return {
         html = { "prettier" },
         yaml = { "prettier" },
         markdown = { "prettier" },
+      },
+      formatters = {
+        rubocop = {
+          command = function(_, ctx)
+            return vim.fs.find("Gemfile", { upward = true, path = ctx.dirname })[1] and "bundle" or "rubocop"
+          end,
+          prepend_args = function(_, ctx)
+            return vim.fs.find("Gemfile", { upward = true, path = ctx.dirname })[1] and { "exec", "rubocop" } or {}
+          end,
+          args = { "--no-server", "-a", "-f", "quiet", "--stderr", "--stdin", "$FILENAME" },
+        },
       },
     },
   },
