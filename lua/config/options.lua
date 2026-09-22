@@ -1,4 +1,4 @@
-vim.env.MISE_RUBY_VERSION = "3.4.8"
+vim.env.MISE_RUBY_VERSION = "3.4.10"
 
 local opt = vim.opt
 
